@@ -63,7 +63,7 @@ export default function withAction() {
                   textDecoration: 'none',
                   bg: useColorModeValue('gray.200', 'gray.700'),
                 }}  
-                href={'minttickets'}>MintTicket</Link>
+                href={'sell'}>Sell Tickets</Link>
                 <Link
                 px={2}
                 py={1}
@@ -72,7 +72,7 @@ export default function withAction() {
                   textDecoration: 'none',
                   bg: useColorModeValue('gray.200', 'gray.700'),
                 }}
-                href={'mytickets'}>Collectibles</Link>
+                href={'collections'}>Collectibles</Link>
                 <Link
                 px={2}
                 py={1}

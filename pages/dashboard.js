@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import { Grid, Flex, Box, Image, useColorModeValue, Button, Heading, Text, Divider } from '@chakra-ui/react';
+import PillPity from 'pill-pity';
 
 import {
   nftmarketaddress, nftaddress
@@ -42,7 +45,9 @@ export default function CreatorDashboard() {
         seller: i.seller,
         owner: i.owner,
         sold: i.sold,
-        image: meta.data.multiple, //Changed from image to multiple:
+        image: meta.data.image,
+        name: meta.data.name,
+        description: meta.description
       }
       return item
     }))
@@ -55,7 +60,131 @@ export default function CreatorDashboard() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
     <div>
-      <h1>Dashboard</h1>
+          
+      <PillPity pattern="glamorous" width="100%">
+        <Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl'  }}
+        color={useColorModeValue('gray.800', 'black')}
+        justify="center" align="center" pt='10'>
+        <Text color={'black.400'}>
+          TICKETS CREATED
+        </Text>{' '}
+        </Heading>       
+        <Grid templateColumns="repeat(3, 1fr)">
+          {
+          nfts.map((nft, i) => (
+          <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
+          <Box
+            bg={useColorModeValue('white', 'gray.800')}
+            maxW="sm"
+            borderWidth="1px"
+            rounded="lg"
+            shadow="lg"
+            position="relative">
+
+            <Image
+              src={nft.image}
+              alt={`Picture of ${nft.name}`}
+              roundedTop="lg"
+              boxSize="350px"
+              objectFit="cover"
+              width="100%"
+              maxHeight="100%" />
+
+            <Box p="6">
+              <Flex mt="1" justifyContent="space-between" alignContent="center">
+                <Box
+                  fontSize="lg"
+                  fontWeight="bold"
+                  as="h4"
+                  lineHeight="tight"
+                  isTruncated>
+                  {nft.name}
+                    </Box>
+                    
+              </Flex>
+              <Flex justifyContent="space-between" alignContent="center">
+                <Box fontSize="1xl" fontWeight="semibold" color={useColorModeValue('gray.800', 'white')}>
+                  {nft.description}
+                </Box>
+              </Flex>
+              <Flex justifyContent="space-between" alignContent="center">
+                <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+                  <Box as="span" color={'gray.600'} fontSize="lg" pl="250">
+                    Eth
+                  </Box>
+                  {nft.price}
+                </Box>
+              </Flex>
+            </Box>
+          </Box>
+        </Flex>
+          ))
+          }
+        </Grid>
+
+        <Divider orientation="horizontal"  color="black" />
+        {
+          Boolean(sold.length) && (
+            <><Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl' }}
+              color={useColorModeValue('gray.800', 'black')}
+              justify="center" align="center" pt='10'>
+              <Text color={'black.400'}>
+                TICKETS SOLD
+              </Text>{' '}
+              </Heading>
+              <Grid templateColumns="repeat(3, 1fr)">
+              {sold.map((nft, i) => (
+                <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
+                  <Box
+                    bg={useColorModeValue('white', 'gray.800')}
+                    maxW="sm"
+                    borderWidth="1px"
+                    rounded="lg"
+                    shadow="lg"
+                    position="relative">
+
+                    <Image
+                      src={nft.image}
+                      alt={`Picture of ${nft.name}`}
+                      roundedTop="lg"
+                      boxSize="350px"
+                      objectFit="cover"
+                      width="100%"
+                      maxHeight="100%" />
+
+                    <Box p="6">
+                      <Flex mt="1" justifyContent="space-between" alignContent="center">
+                        <Box
+                          fontSize="lg"
+                          fontWeight="bold"
+                          as="h4"
+                          lineHeight="tight"
+                          isTruncated>
+                          {nft.name}
+                        </Box>
+
+                      </Flex>
+                      <Flex justifyContent="space-between" alignContent="center">
+                        <Box fontSize="1xl" fontWeight="semibold" color={useColorModeValue('gray.800', 'white')}>
+                          {nft.description}
+                        </Box>
+                      </Flex>
+                      <Flex justifyContent="space-between" alignContent="center">
+                        <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+                          <Box as="span" color={'gray.600'} fontSize="lg" pl="250">
+                            Eth
+                          </Box>
+                          {nft.price}
+                        </Box>
+                      </Flex>
+                    </Box>
+                  </Box>
+                </Flex>
+              ))}
+            </Grid></>  
+        )
+      }
+      </PillPity>
     </div>
-  )
+    )
 }

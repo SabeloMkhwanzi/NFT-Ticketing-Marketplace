@@ -56,8 +56,8 @@ export default function SmallCentered() {
         align={'center'}>
         <Stack direction={'row'} spacing={6}>
           <Link href={'/'}>Home</Link>
-          <Link href={'minttickets'}>MintTicket</Link>
-          <Link href={'mytickets'}>Collectibles</Link>
+          <Link href={'sell'}>Sell Tickets</Link>
+          <Link href={'collections'}>Collectibles</Link>
           <Link href={'dashboard'}>Dashboard</Link>
         </Stack>
       </Container>

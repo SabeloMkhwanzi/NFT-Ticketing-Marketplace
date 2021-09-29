@@ -1,38 +1,36 @@
-/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
-import { ethers } from 'ethers';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Web3Modal, { connectors } from "web3modal";
+import { ethers } from 'ethers'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Web3Modal from "web3modal"
 import { Grid, Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
 
-import { nftaddress, nftmarketaddress } from '../config'
-import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
+import { nftmarketaddress, nftaddress } from '../config'
+
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
+import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 
-import Hero from '../components/hero.tsx';
-
-
-export default function Home() {
+export default function MyAssets() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   useEffect(() => {
     loadNFTs()
   }, [])
+  
   async function loadNFTs() {
-    /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider("https://rinkeby.infura.io/v3/e2a657a09d56489e8d5eb38815ec1b58")
-    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
-    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
-    const data = await marketContract.fetchMarketItems()
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    })
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
 
-    /*
-    *  map over items returned from smart contract and format
-    *  them as well as fetch their token metadata
-    */
+    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
+    const data = await marketContract.fetchMyNFTs()
+
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
@@ -43,48 +41,27 @@ export default function Home() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
-        name: meta.data.name,
-        description: meta.data.description,
+        name: meta.name,
+        description: meta.data.description
       }
       return item
     }))
     setNfts(items)
-    setLoadingState('loaded')
+    setLoadingState('loaded') 
   }
-  async function buyNft(nft) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-
-    /* user will be prompted to pay the asking process to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
-    const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
-      value: price
-    })
-    await transaction.wait()
-    loadNFTs()
-  }
-
-  if (loadingState === 'loaded' && !nfts.length) return (<h1>No items in Marketplace!</h1>)
-     
-  console.log(nfts, "image");
-  
+  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
-  
-    <>
-      <Hero />
-      <PillPity pattern="glamorous"
+    <div>
+      
+        <PillPity pattern="glamorous"
       width="100%"
     >
 
-      <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-        color={useColorModeValue('gray.800', 'white')}
+      <Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl'  }}
+        color={useColorModeValue('gray.800', 'black')}
         justify="center" align="center" pt='10'>
-        <Text color={'blue.400'}>
-          MarketPlace
+        <Text color={'black.400'}>
+          COLLECTIBLES
         </Text>{' '}
         </Heading>      
           <Grid templateColumns="repeat(3, 1fr)">
@@ -116,11 +93,6 @@ export default function Home() {
                   isTruncated>
                   {nft.name}
                 </Box>
-                <Button colorScheme="teal" size="md"
-                  onClick={() => buyNft(nft)}
-                >
-                  Buy
-                </Button>
               </Flex>
               <Flex justifyContent="space-between" alignContent="center">
                 <Box fontSize="1xl" fontWeight="semibold" color={useColorModeValue('gray.800', 'white')}>
@@ -142,16 +114,6 @@ export default function Home() {
       </Grid>     
       
       </PillPity>
-    </>
+   </div>
   )
 }
-
-// PHOTO
-//https://ipfs.infura.io/ipfs/QmR4yDrn7ZVqM6z3w386DuksVuzEM9xb47D1La12wK8DvW
-
-//https://ipfs.infura.io/ipfs/QmamHQfGcagrWA9t89YjhYs1XuBLYZT3vGX2kvjNSJUVQ9
-
-//https://ipfs.infura.io/ipfs/QmeYCMzAZxaAYyRzbsyrgZyDgoYgB6b5bb121Wf4VG9XHz
-
-
-//https://ipfs.infura.io/ipfs/QmdJXvhUEzioqKPms5bCEQGoje98pTd43MSFP7FAU6QV3f
