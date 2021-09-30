@@ -28,4 +28,4 @@ export const ColorModeSwitcher = (props: ColorModeSwitcherProps) => {
   )
 }
 
-export default ColorModeSwitcher;
+

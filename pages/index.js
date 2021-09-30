@@ -68,9 +68,6 @@ export default function Home() {
     await transaction.wait()
     loadNFTs()
   }
-  
- 
-
 
   if (loadingState === 'loaded' && !nfts.length) return (<h1>No items in Marketplace!</h1>)
      

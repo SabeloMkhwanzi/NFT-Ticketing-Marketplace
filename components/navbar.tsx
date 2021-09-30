@@ -15,26 +15,21 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 
-import ColorModeSwitcher from './colorSwitch/ColorModeSwitcher.tsx'
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react"
 
- const connectWallet = async () => {
-  // Check if MetaMask is installed on user's browser
-  if(window.ethereum) {
-    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-    const chainId = await window.ethereum.request({ method: 'eth_chainId'});
-    // Check if user is connected to Mainnet
-    if(chainId != '0x1') {
-      alert("Please connect to Polygon Testnet");
-    } else {
-      let wallet = accounts[0];
-      setWalletAddress(wallet);
-    }
-  } else {
-    alert("Please install Mask");
-  }
-  }
+
+import {ColorModeSwitcher} from './colorModeSwitcher.tsx'
+
+
  
-
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -109,17 +104,29 @@ export default function withAction() {
               size={'sm'}
               mr={4}
             />
-            <Button
+                                   
+            <Button onClick={onOpen}
               variant={'solid'}
               bg={'purple.400'}
               size={'sm'}
               mr={4}
               leftIcon={<AddIcon />}
-              onClick={connectWallet}
-            >
-              connect wallet
-            </Button>
-        
+              
+              >connect wallet</Button>
+
+                  <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Connect Wallet</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                       Please connect to Polygon Testnet
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
           </Flex>
         </Flex>
 
