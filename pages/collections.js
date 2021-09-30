@@ -5,6 +5,7 @@ import axios from 'axios'
 import Web3Modal from "web3modal"
 import { SimpleGrid, Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
+import Head from 'next/head';
 
 import { nftmarketaddress, nftaddress } from '../config'
 
@@ -58,7 +59,9 @@ export default function MyAssets() {
         </Heading>)
   return (
     <div>
-      
+        <Head>
+      <title>Collectibles</title>
+    </Head>
         <PillPity pattern="glamorous"
       width="100%" height="100%"
     >

@@ -7,6 +7,7 @@ import axios from 'axios'
 import Web3Modal from "web3modal"
 import { SimpleGrid, Flex, Box, Image, useColorModeValue, Heading, Text, Divider } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
+import Head from 'next/head';
 
 import {
   nftmarketaddress, nftaddress
@@ -60,7 +61,9 @@ export default function CreatorDashboard() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
     <div>
-          
+      <Head>
+      <title>Dashboard</title>
+    </Head>
       <PillPity pattern="glamorous" width="100%">
         <Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl'  }}
         color={useColorModeValue('gray.800', 'black')}
@@ -132,7 +135,7 @@ export default function CreatorDashboard() {
                 TICKETS SOLD
               </Text>{' '}
               </Heading>
-              <Grid templateColumns="repeat(3, 1fr)">
+              <SimpleGrid columns={[1, null, 3]} spacingX="10px" spacingY="10px">
               {sold.map((nft, i) => (
                 <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
                   <Box
@@ -181,7 +184,7 @@ export default function CreatorDashboard() {
                   </Box>
                 </Flex>
               ))}
-            </Grid></>  
+            </SimpleGrid></>  
         )
       }
       </PillPity>

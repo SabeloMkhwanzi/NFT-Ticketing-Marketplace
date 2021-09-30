@@ -152,12 +152,3 @@ export default function Home() {
   )
 }
 
-// PHOTO
-//https://ipfs.infura.io/ipfs/QmR4yDrn7ZVqM6z3w386DuksVuzEM9xb47D1La12wK8DvW
-
-//https://ipfs.infura.io/ipfs/QmamHQfGcagrWA9t89YjhYs1XuBLYZT3vGX2kvjNSJUVQ9
-
-//https://ipfs.infura.io/ipfs/QmeYCMzAZxaAYyRzbsyrgZyDgoYgB6b5bb121Wf4VG9XHz
-
-
-//https://ipfs.infura.io/ipfs/QmdJXvhUEzioqKPms5bCEQGoje98pTd43MSFP7FAU6QV3f
