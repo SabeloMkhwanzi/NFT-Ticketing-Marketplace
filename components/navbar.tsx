@@ -15,7 +15,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 
-import ColorModeSwitcher from './colorSwitch/ColorModeSwitcher'
+import ColorModeSwitcher from './colorSwitch/ColorModeSwitcher.tsx'
 
  const connectWallet = async () => {
   // Check if MetaMask is installed on user's browser
