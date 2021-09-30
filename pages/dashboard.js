@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
-import { Grid, Flex, Box, Image, useColorModeValue, Button, Heading, Text, Divider } from '@chakra-ui/react';
+import { SimpleGrid, Flex, Box, Image, useColorModeValue, Heading, Text, Divider } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
 
 import {
@@ -69,7 +69,7 @@ export default function CreatorDashboard() {
           TICKETS CREATED
         </Text>{' '}
         </Heading>       
-        <Grid templateColumns="repeat(3, 1fr)">
+        <SimpleGrid  columns={[1, null, 3]} spacingX="10px" spacingY="10px">
           {
           nfts.map((nft, i) => (
           <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
@@ -120,7 +120,7 @@ export default function CreatorDashboard() {
         </Flex>
           ))
           }
-        </Grid>
+        </SimpleGrid>
 
         <Divider orientation="horizontal"  color="black" />
         {

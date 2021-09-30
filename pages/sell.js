@@ -129,14 +129,14 @@ export default function CreateItem() {
             An NFT can be minted and ready to sell in less than a minute.
               <br />
               <br />
-            <Text as="mark">NB: ALL TRANSACTION TAKES 10 - 15 SECONDS TO VERIFIER!</Text>
+            <Text as="mark">NB: ALL TRANSACTION TAKES 10 - 15 SECONDS TO VERIFY!</Text>
 
             </Text>
           </Stack>
           <Box as={'form'} mt={10}>
             <Stack spacing={4}>
               <Input
-                placeholder="Enter EventName"
+                placeholder="Enter Event Name"
                 bg={'gray.100'}
                 border={0}
                 color={'gray.500'}
@@ -154,7 +154,7 @@ export default function CreateItem() {
                 }} onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
               />
               <Input
-                placeholder="Enter amount in Eth"
+                placeholder="Enter amount in Matic"
                 bg={'gray.100'}
                 border={0}
                 color={'gray.500'}
@@ -187,12 +187,10 @@ export default function CreateItem() {
               fontFamily={'heading'}
               mt={8}
               w={'full'}
-              bgGradient="linear(to-r, red.400,pink.400)"
+              bg={'purple.400', 'purple.400'}
               color={'white'}
-              _hover={{
-                bgGradient: 'linear(to-r, red.400,pink.400)',
-                boxShadow: 'xl',
-              }} onClick={createItem}
+              _hover={ 'purple.400', 'purple.400'}
+              onClick={createItem}
             >
               Mint Ticket
             </Button>

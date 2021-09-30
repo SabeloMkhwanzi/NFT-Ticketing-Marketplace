@@ -5,6 +5,7 @@ import {
   Image,
   Stack,
   Text,
+  Link,
   useBreakpointValue,
 } from '@chakra-ui/react';
 
@@ -24,13 +25,13 @@ export default function SplitScreen() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: 'purple.400',
                 zIndex: -1,
               }}>
               NFT Ticketing
             </Text>
             <br />{' '}
-            <Text color={'blue.400'} as={'span'}>
+            <Text color={'purple.400'} as={'span'}>
               MarketPlace
             </Text>{' '}
           </Heading>
@@ -41,19 +42,18 @@ export default function SplitScreen() {
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
-              bg={'blue.400'}
+            bg={'purple.400'}
               color={'white'}
               _hover={{
-                bg: 'blue.500',
-              }}>
-              Mint Ticket
-            </Button>
-            <Button
-              
-              variant="outline"
+                bg: 'purple.500',}}
+            ><Link 
+               href={'sell'}
             >
-              
-              How It Works</Button>
+              Sell Tickets
+            </Link></Button>
+            <Button             
+              variant="outline"           
+            ><Link href={'sell'}>How It Works</Link></Button>
           </Stack>
         </Stack>
       </Flex>

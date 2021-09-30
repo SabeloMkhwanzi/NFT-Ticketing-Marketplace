@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Web3Modal, { connectors } from "web3modal";
-import { Grid, Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
+import { SimpleGrid , Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
 
 import { nftaddress, nftmarketaddress } from '../config'
@@ -24,7 +24,7 @@ export default function Home() {
   }, [])
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider("https://rinkeby.infura.io/v3/e2a657a09d56489e8d5eb38815ec1b58")
+    const provider = new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/e2a657a09d56489e8d5eb38815ec1b58")
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
@@ -67,6 +67,9 @@ export default function Home() {
     await transaction.wait()
     loadNFTs()
   }
+  
+ 
+
 
   if (loadingState === 'loaded' && !nfts.length) return (<h1>No items in Marketplace!</h1>)
      
@@ -79,15 +82,16 @@ export default function Home() {
       <PillPity pattern="glamorous"
       width="100%"
     >
-
+        
       <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
         color={useColorModeValue('gray.800', 'white')}
         justify="center" align="center" pt='10'>
-        <Text color={'blue.400'}>
+        <Text color={'purple.400'}>
           MarketPlace
         </Text>{' '}
-        </Heading>      
-          <Grid templateColumns="repeat(3, 1fr)">
+        </Heading>
+        
+      <SimpleGrid  columns={[1, null, 3]} spacingX="10px" spacingY="10px">
         {nfts.map((nft, i) => <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
           <Box
             bg={useColorModeValue('white', 'gray.800')}
@@ -116,7 +120,7 @@ export default function Home() {
                   isTruncated>
                   {nft.name}
                 </Box>
-                <Button colorScheme="teal" size="md"
+                <Button bg="purple.400" size="md"
                   onClick={() => buyNft(nft)}
                 >
                   Buy
@@ -130,7 +134,7 @@ export default function Home() {
               <Flex justifyContent="space-between" alignContent="center">
                 <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
                   <Box as="span" color={'gray.600'} fontSize="lg" pl="250">
-                    Eth
+                    Matic
                   </Box>
                   {nft.price}
                 </Box>
@@ -139,7 +143,7 @@ export default function Home() {
           </Box>
         </Flex>
         )}
-      </Grid>     
+      </SimpleGrid >     
       
       </PillPity>
     </>

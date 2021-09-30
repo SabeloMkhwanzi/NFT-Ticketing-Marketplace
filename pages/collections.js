@@ -3,7 +3,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
-import { Grid, Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
+import { SimpleGrid, Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
 
 import { nftmarketaddress, nftaddress } from '../config'
@@ -49,12 +49,18 @@ export default function MyAssets() {
     setNfts(items)
     setLoadingState('loaded') 
   }
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
+  if (loadingState === 'loaded' && !nfts.length) return ( <Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl'  }}
+        color={useColorModeValue('gray.800', 'black')}
+        justify="center" align="center" pt='10'>
+        <Text color={'black.400'}>
+          No assets owned
+        </Text>{' '}
+        </Heading>)
   return (
     <div>
       
         <PillPity pattern="glamorous"
-      width="100%"
+      width="100%" height="100%"
     >
 
       <Heading fontSize={{ base: '2xl', md: '3xl', lg: '2xl'  }}
@@ -64,7 +70,7 @@ export default function MyAssets() {
           COLLECTIBLES
         </Text>{' '}
         </Heading>      
-          <Grid templateColumns="repeat(3, 1fr)">
+          <SimpleGrid  columns={[1, null, 3]} spacingX="10px" spacingY="10px">
         {nfts.map((nft, i) => <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
           <Box
             bg={useColorModeValue('white', 'gray.800')}
@@ -111,7 +117,7 @@ export default function MyAssets() {
           </Box>
         </Flex>
         )}
-      </Grid>     
+      </SimpleGrid>     
       
       </PillPity>
    </div>

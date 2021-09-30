@@ -55,17 +55,17 @@ export default function SmallCentered() {
         justify={'center'}
         align={'center'}>
         <Stack direction={'row'} spacing={6}>
-          <Link href={'/'}>Home</Link>
-          <Link href={'sell'}>Sell Tickets</Link>
-          <Link href={'collections'}>Collectibles</Link>
-          <Link href={'dashboard'}>Dashboard</Link>
+          <Link colorScheme="purple.400" variant="ghost"  fontWeight='bold' href={'/'}>Home</Link>
+          <Link fontWeight='bold' href={'sell'}>Sell Tickets</Link>
+          <Link fontWeight='bold' href={'collections'}>Collectibles</Link>
+          <Link fontWeight='bold' href={'dashboard'}>Dashboard</Link>
         </Stack>
       </Container>
 
       <Box
         borderTopWidth={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}>
+        borderColor={useColorModeValue('purple.200', 'purple.700')}>
         <Container
           as={Stack}
           maxW={'6xl'}
@@ -82,9 +82,9 @@ export default function SmallCentered() {
             <SocialButton label={'Github'} href={'https://github.com/SabeloMkhwanzi'}>
               <FaGithub />
             </SocialButton>
-            <SocialButton label={'Linkdeni'} href={'https://www.linkedin.com/in/sabelo-mkhwanazi-54ba431b1/'}>
+            {/* <SocialButton label={'Linkdeni'} href={'https://www.linkedin.com/in/sabelo-mkhwanazi-54ba431b1/'}>
               <FaLinkedinIn />
-            </SocialButton>
+            </SocialButton> */}
           </Stack>
         </Container>
       </Box>
