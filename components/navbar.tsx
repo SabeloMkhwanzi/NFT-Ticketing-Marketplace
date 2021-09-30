@@ -43,7 +43,7 @@ export default function withAction() {
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
-            color='purple.400'
+            color='purple.600'
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
@@ -128,7 +128,8 @@ export default function withAction() {
                 <Link
                   px={2}
                 py={1}
-                color="purple.400"
+                fontWeight="bold"
+                color="purple.600"
                   rounded={'md'}
                   _hover={{
                     textDecoration: 'none',
@@ -138,7 +139,8 @@ export default function withAction() {
                 <Link
                 px={2}
                 py={1}
-                color="purple.400"
+                fontWeight="bold"
+                color="purple.600"
                 rounded={'md'}
                 _hover={{
                   textDecoration: 'none',
@@ -148,7 +150,8 @@ export default function withAction() {
                 <Link
                 px={2}
                 py={1}
-                color="purple.400"
+                fontWeight="bold"
+                color="purple.600"
                 rounded={'md'}
                 _hover={{
                   textDecoration: 'none',
@@ -158,7 +161,8 @@ export default function withAction() {
                 <Link
                 px={2}
                 py={1}
-                color="purple.400"
+                fontWeight="bold"
+                color="purple.600"
                 rounded={'md'}
                 _hover={{
                   textDecoration: 'none',
@@ -171,4 +175,8 @@ export default function withAction() {
       </Box>
     </>
   );
+}
+
+function setWalletAddress(wallet: any) {
+  throw new Error('Function not implemented.');
 }

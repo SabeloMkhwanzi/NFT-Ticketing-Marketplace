@@ -8,6 +8,7 @@ import axios from 'axios';
 import Web3Modal, { connectors } from "web3modal";
 import { SimpleGrid , Flex, Box, Image, useColorModeValue, Button, Heading, Text } from '@chakra-ui/react';
 import PillPity from 'pill-pity';
+import Head from "next/head"
 
 import { nftaddress, nftmarketaddress } from '../config'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
@@ -76,77 +77,78 @@ export default function Home() {
   console.log(nfts, "image");
   
   return (
-  
-    <>
-      <Hero />
-      <PillPity pattern="glamorous"
-      width="100%"
-    >
-        
-      <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-        color={useColorModeValue('gray.800', 'white')}
-        justify="center" align="center" pt='10'>
-        <Text color={'purple.400'}>
-          MarketPlace
-        </Text>{' '}
-        </Heading>
-        
-      <SimpleGrid  columns={[1, null, 3]} spacingX="10px" spacingY="10px">
-        {nfts.map((nft, i) => <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
-          <Box
-            bg={useColorModeValue('white', 'gray.800')}
-            maxW="sm"
-            borderWidth="1px"
-            rounded="lg"
-            shadow="lg"
-            position="relative">
+      <><Head>
+      <title>TicketVast</title>
+    </Head><>
+        <Hero />
+        <PillPity pattern="glamorous"
+          width="100%"
+        >
 
-            <Image
-              src={nft.image}
-              alt={`Picture of ${nft.name}`}
-              roundedTop="lg"
-              boxSize="350px"
-              objectFit="cover"
-              width="100%"
-              maxHeight="100%" />
+          <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+            color={useColorModeValue('gray.800', 'white')}
+            justify="center" align="center" pt='10'>
+            <Text color={'purple.400'}>
+              MarketPlace
+            </Text>{' '}
+          </Heading>
 
-            <Box p="6">
-              <Flex mt="1" justifyContent="space-between" alignContent="center">
-                <Box
-                  fontSize="lg"
-                  fontWeight="bold"
-                  as="h4"
-                  lineHeight="tight"
-                  isTruncated>
-                  {nft.name}
+          <SimpleGrid columns={[1, null, 3]} spacingX="10px" spacingY="10px">
+            {nfts.map((nft, i) => <Flex key={i} p={50} w="full" alignItems="center" justifyContent="center">
+              <Box
+                bg={useColorModeValue('white', 'gray.800')}
+                maxW="sm"
+                borderWidth="1px"
+                rounded="lg"
+                shadow="lg"
+                position="relative">
+
+                <Image
+                  src={nft.image}
+                  alt={`Picture of ${nft.name}`}
+                  roundedTop="lg"
+                  boxSize="350px"
+                  objectFit="cover"
+                  width="100%"
+                  maxHeight="100%" />
+
+                <Box p="6">
+                  <Flex mt="1" justifyContent="space-between" alignContent="center">
+                    <Box
+                      fontSize="lg"
+                      fontWeight="bold"
+                      as="h4"
+                      lineHeight="tight"
+                      isTruncated>
+                      {nft.name}
+                    </Box>
+                    <Button bg="purple.400" size="md"
+                      onClick={() => buyNft(nft)}
+                    >
+                      Buy
+                    </Button>
+                  </Flex>
+                  <Flex justifyContent="space-between" alignContent="center">
+                    <Box fontSize="1xl" fontWeight="semibold" color={useColorModeValue('gray.800', 'white')}>
+                      {nft.description}
+                    </Box>
+                  </Flex>
+                  <Flex justifyContent="space-between" alignContent="center">
+                    <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+                      <Box as="span" color={'gray.600'} fontSize="lg" pl="250">
+                        Matic
+                      </Box>
+                      {nft.price}
+                    </Box>
+                  </Flex>
                 </Box>
-                <Button bg="purple.400" size="md"
-                  onClick={() => buyNft(nft)}
-                >
-                  Buy
-                </Button>
-              </Flex>
-              <Flex justifyContent="space-between" alignContent="center">
-                <Box fontSize="1xl" fontWeight="semibold" color={useColorModeValue('gray.800', 'white')}>
-                  {nft.description}
-                </Box>
-              </Flex>
-              <Flex justifyContent="space-between" alignContent="center">
-                <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-                  <Box as="span" color={'gray.600'} fontSize="lg" pl="250">
-                    Matic
-                  </Box>
-                  {nft.price}
-                </Box>
-              </Flex>
-            </Box>
-          </Box>
-        </Flex>
-        )}
-      </SimpleGrid >     
-      
-      </PillPity>
-    </>
+              </Box>
+            </Flex>
+            )}
+          </SimpleGrid>
+
+        </PillPity>
+      </></>
   )
 }
 
