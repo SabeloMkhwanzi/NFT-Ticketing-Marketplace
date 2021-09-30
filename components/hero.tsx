@@ -5,8 +5,7 @@ import {
   Image,
   Stack,
   Text,
-  Link,
-  useBreakpointValue,
+  Link
 } from '@chakra-ui/react';
 
 export default function SplitScreen() {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { ReactNode } from 'react';
 import {
   Box,
@@ -14,7 +15,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 
-import ColorModeSwitcher from './colorSwitch/ColorModeSwitcher.tsx'
+import ColorModeSwitcher from './colorSwitch/ColorModeSwitcher'
 
  const connectWallet = async () => {
   // Check if MetaMask is installed on user's browser
